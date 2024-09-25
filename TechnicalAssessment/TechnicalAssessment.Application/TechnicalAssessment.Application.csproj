@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TechnicalAssessment.Core\TechnicalAssessment.Core.csproj" />
     <ProjectReference Include="..\TechnicalAssessment.Domain\TechnicalAssessment.Domain.csproj" />
+    <ProjectReference Include="..\TechnicalAssessment.Infrastructure\TechnicalAssessment.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@ using TechnicalAssessment.Domain.Commands.User.Validators;
 using TechnicalAssessment.Domain.Interfaces.Repositories;
 using TechnicalAssessment.Infrastructure.Data.Configurations;
 using TechnicalAssessment.Infrastructure.Data.Context;
+using TechnicalAssessment.Infrastructure.Data.MockData;
 using TechnicalAssessment.Infrastructure.Data.Repositories;
 
 namespace TechnicalAssessment.IoC
@@ -32,6 +33,9 @@ namespace TechnicalAssessment.IoC
 
             //queries
             services.AddScoped<IUserQueries, UserQueries>();
+
+            //imemorey
+            services.AddSingleton<MockData>();
         }
 
 

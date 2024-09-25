@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>User Management</h2>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="error">
+        {{ error }}
+    </div>
+
+    <!-- User Form -->
+    <form [formGroup]="userForm" (ngSubmit)="isEditMode ? updateUser() : createUser()">
+        <input formControlName="id" type="hidden" />
+        <div>
+            <label for="name">Name:</label>
+            <input id="name" formControlName="name" />
+            <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                Name is required.
+            </div>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <input id="address" formControlName="address" />
+        </div>
+        <button type="submit">{{ isEditMode ? 'Update' : 'Submit' }}</button>
+        <button type="button" (click)="userForm.reset()">Reset</button>
+    </form>
+
+    <!-- User Grid -->
+    <table>
+        <thead>
+            <tr>                
+                <th>Name</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList$ | async">               
+                <td>{{ user.name }}</td>
+                <td>{{ user.address }}</td>
+                <td>
+                    <button (click)="selectUser(user)">Edit</button>
+                    <button (click)="deleteUser(user?.id?.toString())">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

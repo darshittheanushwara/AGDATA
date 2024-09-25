@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using TechnicalAssessment.Application.User;
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Domain.Commands.User;
@@ -28,7 +29,14 @@ namespace TechnicalAssessment.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_userQueries.GetAll());
+            var userList= _userQueries.GetAll();
+
+            if (userList.Count() == 0)
+            {
+                
+            }
+
+            return Ok(userList);
         }
 
         [HttpGet]
@@ -61,8 +69,10 @@ namespace TechnicalAssessment.API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(DeleteUserCommand command)
+        [Route("{Id}")]
+        public IActionResult Delete(string Id)
         {
+            var command = new DeleteUserCommand { Id = Id };            
             var result = _deleteUserCommandHandler.Handle(command);
 
             if (result.Success)

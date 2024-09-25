@@ -37,17 +37,12 @@ namespace TechnicalAssessment.Infrastructure.Data.Context
                 if (args.Entity is IEntity auditable)
                 {
                     var now = DateTime.UtcNow;
+                    auditable.Created = now;
 
-                    if (string.IsNullOrEmpty(args.DocumentId))
-                    {
-                        // Set CreatedAt for new documents
-                        auditable.Created = now;
-                    }
-                    else
+                    if (!string.IsNullOrEmpty(args.DocumentId))
                     {
                         auditable.Updated = now;
-                    }                   
-                    
+                    }
                 }
             };
         }
